@@ -6,12 +6,19 @@ import torch.nn.functional as F
 
 # TODO step 1. 
 class GraphConvolutionLayer(nn.Module):
-    def __init__(self, in_features, out_features, dropout):
+    def __init__(self, in_features, out_features):
         super(GraphConvolutionLayer,self).__init__()
-        pass
+        self.W = torch.nn.Parameter(torch.zeros(in_features, out_features, dtype = torch.float32))
+        torch.nn.init.xavier_uniform_(self.W) # initialize as described in Glorot & Bengio (2010)
     
     def forward(self, input, adj):
-        pass
+        '''
+        <params>
+        input (= X) : a tensor with size [num_nodes, num_channels]
+        adj (= A_hat) : a tensor with size [num_nodes, num_nodes]
+        '''
+
+        return torch.mm(adj, torch.mm(input, self.W))
 
 # TODO step 2. 
 class GraphAttentionLayer(nn.Module):

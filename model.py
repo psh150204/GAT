@@ -5,12 +5,16 @@ from layer import GraphConvolutionLayer, GraphAttentionLayer, SparseGraphConvolu
 
 # TODO step 1.
 class GCN(nn.Module):
-    def __init__(self, nfeat, nhid, nclass, dropout):
+    def __init__(self, C, H, F, dropout):
         super(GCN, self).__init__()
-        pass
+        self.layer1 = GraphConvolutionLayer(C, H)
+        self.layer2 = GraphConvolutionLayer(H, F)
+        self.dropout = nn.Dropout(p = dropout)
 
     def forward(self, x, adj):
-        pass
+        # X : a tensor with size [N, C]
+        x = self.dropout(F.relu(self.layer1(x, adj)))
+        return self.layer2(x, adj)
     
 # TODO step 2.
 class GAT(nn.Module):

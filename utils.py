@@ -41,8 +41,6 @@ def load_data(dataset="cora"):
 
     return adj, features, labels, idx_train, idx_val, idx_test 
 
-      
-
 def accuracy(output, labels):
     preds = output.max(1)[1].type_as(labels)
     correct = preds.eq(labels).double()
@@ -72,4 +70,10 @@ def encode_onehot(labels):
     labels_onehot = np.array(list(map(classes_dict.get, labels)), dtype=np.int32)
     return labels_onehot 
 
+def save_checkpoint(model, path):
+    model_state = {
+        'state_dict' : model.state_dict()
+    }
     
+    torch.save(model_state, path)
+    print('A check point has been generated : ' + path)
