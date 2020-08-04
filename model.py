@@ -1,9 +1,8 @@
 import torch
 import torch.nn as nn 
 import torch.nn.functional as F 
-from layer import GraphConvolutionLayer, GraphAttentionLayer, SparseGraphConvolutionLayer, SparseGraphAttentionLayer
+from layer import GraphConvolutionLayer, GraphAttentionLayer
 
-# TODO step 1.
 class GCN(nn.Module):
     def __init__(self, F, H, C, dropout):
         super(GCN, self).__init__()
@@ -17,7 +16,6 @@ class GCN(nn.Module):
         x = self.dropout(F.relu(self.layer1(x, adj))) # [N, H]
         return self.layer2(x, adj) # [N, C]
     
-# TODO step 2.
 class GAT(nn.Module):
     def __init__(self, F, H, C, dropout, alpha, K):
         super(GAT, self).__init__()
@@ -30,20 +28,3 @@ class GAT(nn.Module):
 
         x = self.dropout(F.relu(self.layer1(x, adj))) # [N, KH]
         return self.layer2(x, adj) # [N, C]
-
-# TODO step 3.
-class SpGCN(nn.Module):
-    def __init__(self, nfeat, nhid, nclass, dropout):
-        super(SpGCN, self).__init__()
-        pass
-
-    def forward(self, x, adj):
-        pass
-
-class SpGAT(nn.Module):
-    def __init__(self,nfeat, nhid, nclass, dropout, alpha, nheads):
-        super(SpGAT, self).__init__()
-        pass
-
-    def forward(self, x, adj):
-        pass

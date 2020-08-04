@@ -12,8 +12,8 @@ import torch.nn.functional as F
 import torch.optim as optim 
 from torch.autograd import Variable
 
-from utils import accuracy, load_data
-from model import GCN, GAT, SpGCN, SpGAT
+from utils import accuracy, load_data, mkdir_p
+from model import GCN, GAT
  
 def main(args):
     # meta settings
@@ -59,7 +59,7 @@ def main(args):
 
     train_losses, train_accs, val_losses, val_accs = [], [], [], []
 
-    # Training
+    # Train
     for epoch in range(args.epochs):
         t = time.time()
         network.train()
@@ -98,14 +98,17 @@ def main(args):
             print("There's no improvements during %d epochs and so stop the training."%(args.patience))
             break
     
-    # Testing
+    # Test
     with torch.no_grad():
         network.eval()
         preds = network(features, adj)
         test_acc = accuracy(preds[idx_test], labels[idx_test])
         print('Test Accuracy : %.2f'%(test_acc * 100))
 
-    # Plotting
+    # Plot
+    output_dir = "results/random_seed_" + str(args.seed)
+    mkdir_p(output_dir)
+
     fig, ax = plt.subplots()
     ax.plot(train_losses, label = 'train loss')
     ax.plot(val_losses, label = 'validation loss')
@@ -116,7 +119,7 @@ def main(args):
     ax.set(title="Loss Curve of " + args.model + " on " + args.dataset)
     ax.grid()
 
-    fig.savefig("results/"+args.model+"_"+args.dataset+"_loss_curve.png")
+    fig.savefig("results/"+ "random_seed_" + str(args.seed) + "/" + args.model + "_" + args.dataset + "_loss_curve.png")
     plt.close()
 
     fig, ax = plt.subplots()
@@ -129,7 +132,7 @@ def main(args):
     ax.set(title="Accuracy Graph of " + args.model + " on " + args.dataset + " : Test Accuracy %.4f"%(test_acc))
     ax.grid()
 
-    fig.savefig("results/"+args.model+"_"+args.dataset+"_accuracy.png")
+    fig.savefig("results/"+ "random_seed_" + str(args.seed) + "/" + args.model + "_" + args.dataset + "_accuracy.png")
     plt.close()
 
 if __name__  == "__main__":
@@ -141,7 +144,7 @@ if __name__  == "__main__":
     parser.add_argument('--sparse', action='store_true', default=False, help='GAT with sparse version or not.')
     parser.add_argument('--seed', type=int, default=72, help='Random seed.')
     parser.add_argument('--epochs', type=int, default=200, help='Number of epochs to train.')
-    parser.add_argument('--save_every', type=int, default=500, help='Save every n epochs')
+    parser.add_argument('--save_every', type=int, default=10, help='Save every n epochs')
     parser.add_argument('--lr', type=float, default=0.005, help='Initial learning rate.')
     parser.add_argument('--weight_decay', type=float, default=5e-4, help='Weight decay (L2 loss on parameters).')
     parser.add_argument('--hidden', type=int, default=64, help='Number of hidden units.')
