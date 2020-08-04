@@ -12,18 +12,18 @@ PyTorch implementation of the paper "Graph Attention Networks".
 
 ### Accuracy Curves
 <p float="left">
-  <img src="results/random_seed_3/GAT_cora_accuracy.png" width="500" />
-  <img src="results/random_seed_5/GCN_cora_accuracy.png" width="500" /> 
-  <img src="results/random_seed_11/GAT_citeseer_accuracy.png" width="500" />
-  <img src="results/random_seed_10/GCN_citeseer_accuracy.png" width="500" />
+  <img src="results/random_seed_3/GAT_cora_accuracy.png" width="400" />
+  <img src="results/random_seed_5/GCN_cora_accuracy.png" width="400" /> 
+  <img src="results/random_seed_11/GAT_citeseer_accuracy.png" width="400" />
+  <img src="results/random_seed_10/GCN_citeseer_accuracy.png" width="400" />
 </p>
 
 ### Loss Curves
 <p float="left">
-  <img src="results/random_seed_3/GAT_cora_loss_curve.pn" width="500" />
-  <img src="results/random_seed_5/GCN_cora_loss_curve.png" width="500" /> 
-  <img src="results/random_seed_11/GAT_citeseer_loss_curve.png" width="500" />
-  <img src="results/random_seed_10/GCN_citeseer_loss_curve.png" width="500" />
+  <img src="results/random_seed_3/GAT_cora_loss_curve.png" width="400" />
+  <img src="results/random_seed_5/GCN_cora_loss_curve.png" width="400" /> 
+  <img src="results/random_seed_11/GAT_citeseer_loss_curve.png" width="400" />
+  <img src="results/random_seed_10/GCN_citeseer_loss_curve.png" width="400" />
 </p>
 
 ### References
