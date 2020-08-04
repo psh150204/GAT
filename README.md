@@ -12,10 +12,10 @@ PyTorch implementation of the paper "Graph Attention Networks".
 
 ### Accuracy Curves
 <p float="left">
-  <img src="results/random_seed_3/GAT_cora_accuracy.png" width="100" />
-  <img src="results/random_seed_5/GCN_cora_accuracy.png" width="100" /> 
-  <img src="results/random_seed_11/GAT_citeseer_accuracy.png" width="100" />
-  <img src="results/random_seed_10/GCN_citeseer_accuracy.png" width="100" />
+  <img src="results/random_seed_3/GAT_cora_accuracy.png" width="300" />
+  <img src="results/random_seed_5/GCN_cora_accuracy.png" width="300" /> 
+  <img src="results/random_seed_11/GAT_citeseer_accuracy.png" width="300" />
+  <img src="results/random_seed_10/GCN_citeseer_accuracy.png" width="300" />
 </p>
 
 ![acc_curve_GAT_cora](results/random_seed_3/GAT_cora_accuracy.png) ![acc_curve_GAT_citeseer](results/random_seed_11/GAT_citeseer_accuracy.png)
