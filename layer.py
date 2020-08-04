@@ -57,6 +57,7 @@ class Attention(nn.Module):
         return F.elu(h_prime) # [N, F']
 
 class GraphAttentionLayer(nn.Module):
+    # multi head attention
     def __init__(self, in_features, out_features, num_heads, alpha, concat=True):
         super(GraphAttentionLayer, self).__init__()
         self.concat = concat
@@ -66,6 +67,7 @@ class GraphAttentionLayer(nn.Module):
         # input (= X) : a tensor with size [N, F]
 
         if self.concat :
+            # concatenate
             outputs = []
             for attention in self.attentions:
                 outputs.append(attention(input, adj))
@@ -73,6 +75,7 @@ class GraphAttentionLayer(nn.Module):
             return torch.cat(outputs, dim = -1) # [N, KF']
 
         else :
+            # average
             output = None
             for attention in self.attentions:
                 if output == None:

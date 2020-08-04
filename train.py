@@ -12,7 +12,7 @@ import torch.nn.functional as F
 import torch.optim as optim 
 from torch.autograd import Variable
 
-from utils import accuracy, load_data, save_checkpoint
+from utils import accuracy, load_data
 from model import GCN, GAT, SpGCN, SpGAT
  
 def main(args):
@@ -83,12 +83,8 @@ def main(args):
             if val_loss < best_loss :
                 best_loss = val_loss
                 epochs_since_improvement = 0
-                save_checkpoint(network, 'checkpoints/best.pt')
-            else :
+            else:
                 epochs_since_improvement += 1
-        
-        if (epoch + 1) % args.save_every == 0:
-            save_checkpoint(network, 'checkpoints/epoch_%d.pt'%(epoch+1))
 
         train_losses.append(train_loss.item())
         train_accs.append(train_acc.item())
@@ -113,6 +109,8 @@ def main(args):
     fig, ax = plt.subplots()
     ax.plot(train_losses, label = 'train loss')
     ax.plot(val_losses, label = 'validation loss')
+    ax.set_xlabel('epochs')
+    ax.set_ylabel('cross entropy loss')
     ax.legend()
 
     ax.set(title="Loss Curve of " + args.model + " on " + args.dataset)
@@ -124,9 +122,11 @@ def main(args):
     fig, ax = plt.subplots()
     ax.plot(train_accs, label = 'train accuracy')
     ax.plot(val_accs, label = 'validation accuracy')
+    ax.set_xlabel('epochs')
+    ax.set_ylabel('accuracy')
     ax.legend()
 
-    ax.set(title="Accuracy Graph of " + args.model + " on " + args.dataset)
+    ax.set(title="Accuracy Graph of " + args.model + " on " + args.dataset + " : Test Accuracy %.4f"%(test_acc))
     ax.grid()
 
     fig.savefig("results/"+args.model+"_"+args.dataset+"_accuracy.png")
