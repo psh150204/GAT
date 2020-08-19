@@ -1,5 +1,5 @@
 # GAT (Graph Attention Networks)
-PyTorch implementation of the paper "Graph Attention Networks".
+PyTorch implementation of the paper "Graph Attention Networks" (ICLR 2018)
 
 ### Requirements
 * Python 3.6 >
